@@ -1543,6 +1543,18 @@
       "size": 5,
       "required": "true"
     },
+    { "name": "Match Level",
+      "code": "l",
+      "type": "level",
+      "choices": {
+        "pr": "Practice<br>",
+        "qu": "Qualification<br>",
+        "pl": "Playoff"
+      },
+      "defaultValue": "fo",
+      "required": "true",
+      "disabled": "true"
+    },
     { "name": "Match #",
       "code": "m",
       "type": "match",
@@ -1569,21 +1581,10 @@
       "min": 1,
       "max": 99999
     },
-    { "name": "Event",
+    { "name": "Event(Locked)",
       "code": "e",
       "type": "event",
-      "defaultValue": "Simulation Competion",
-      "required": "true",
-      "disabled": "true"
-    },
-    { "name": "Match Level",
-      "code": "l",
-      "type": "level",
-      "choices": {
-        "pr": "pratice<br>",
-        "fo": "formal"
-      },
-      "defaultValue": "fo",
+      "defaultValue": "Competion",
       "required": "true",
       "disabled": "true"
     }
@@ -1632,8 +1633,12 @@
       "code": "teleopAmpTried",
       "type": "counter"
     },
-    { "name": "Amp Scores",
-      "code": "teleopAmpScores",
+    { "name": "Amp Scores(UnAmplified)",
+      "code": "teleopAmpScoresUnAmplified",
+      "type": "counter"
+    },
+    { "name": "Amp Scores(Amplified)",
+      "code": "teleopAmpScoresAmplified",
       "type": "counter"
     },
     { "name": "Trap",
@@ -1985,7 +1990,7 @@
                 <h1 id="autonHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span
                         class="odd">n</span><span class="even">A</span><span class="odd">G</span><span
                         class="even">E</span><br>Scouting 2020</h1>
-                <h2 id="autonHeader2">Auton</h2>
+                <h2 id="autonHeader2">Auto</h2>
                 <p class="match-label"><input type="button" value="Prev" id="prevButton1" onclick="swipePage(-1)"><input
                         type="button" value="Next" id="nextButton3" onclick="swipePage(1)"></p>
                 <table id="auton_table">

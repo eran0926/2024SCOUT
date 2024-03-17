@@ -750,6 +750,14 @@
                 idx = addText(table, idx, name, err);
                 return
             }
+            if (data.hasOwnProperty('required')) {
+                if (data.required.toLowerCase() == 'true') {
+                    requiredFields.push(data.code);
+                }
+            }
+            else {
+                requiredFields.push(data.code);
+            }
             if (type == 'counter') {
                 idx = addCounter(table, idx, name, data);
             } else if ((data.type == 'scouter') ||
@@ -914,7 +922,7 @@
                         thisInputEl = thisRF instanceof RadioNodeList ? thisRF[0] : thisRF;
                         rftitle = thisInputEl.parentElement.parentElement.children[0].innerHTML.replace("&nbsp;", "");
                     }
-                    errStr += rf + ": " + rftitle + "\n";
+                    errStr += rftitle + "\n";
                     ret = false;
                 }
             }
@@ -1550,7 +1558,6 @@
         "qu": "Qualification<br>",
         "pl": "Playoff"
       },
-      "defaultValue": "fo",
       "required": "true",
       "disabled": "true"
     },
@@ -1597,9 +1604,9 @@
       "code": "preLoad",
       "type": "radio",
       "choices": {
-        "s": "Speaker",
-        "a": "AMP",
-        "n": "None"
+        "Speaker": "Speaker",
+        "AMP": "AMP",
+        "None": "None"
       }
     },
     { "name": "Speaker Tried",
@@ -1689,7 +1696,8 @@
     },
     { "name": "Disabled",
       "code": "disabled",
-      "type": "bool"}
+      "type": "bool"
+    }
   ]
 }`;
     </script>

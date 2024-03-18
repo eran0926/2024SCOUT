@@ -117,6 +117,7 @@
     </script>
     <!-- <script src="resources/js/scoutingPASS.js"></script> -->
     <script>
+
         // ScoutingPASS.js
         //
         // The guts of the ScountingPASS application
@@ -143,7 +144,8 @@
         // Must be filled in: e=event, m=match#, l=level(q,qf,sf,f), t=team#, r=robot(r1,r2,b1..), s=scouter
         //var requiredFields = ["e", "m", "l", "t", "r", "s", "as"];
         // var requiredFields = ["e", "m", "l", "r", "s", "as"];
-        var requiredFields = [];
+        // var requiredFields = [];
+        var requiredFields = {};
 
         function addTimer(table, idx, name, data) {
             var row = table.insertRow(idx);
@@ -752,11 +754,19 @@
             }
             if (data.hasOwnProperty('required')) {
                 if (data.required.toLowerCase() == 'true') {
-                    requiredFields.push(data.code);
+                    if (requiredFields[table.parentElement.id] == undefined) {
+                        requiredFields[table.parentElement.id] = []
+                    }
+                    requiredFields[table.parentElement.id].push(data.code)
+                    // requiredFields.push(data.code);
                 }
             }
             else {
-                requiredFields.push(data.code);
+                if (requiredFields[table.parentElement.id] == undefined) {
+                    requiredFields[table.parentElement.id] = []
+                }
+                requiredFields[table.parentElement.id].push(data.code)
+                // requiredFields.push(data.code);
             }
             if (type == 'counter') {
                 idx = addCounter(table, idx, name, data);
@@ -913,21 +923,26 @@
         function validateData() {
             var ret = true;
             var errStr = "";
-            for (rf of requiredFields) {
-                var thisRF = document.forms.scoutingForm[rf];
-                if (thisRF.value == "[]" || thisRF.value.length == 0) {
-                    if (rf == "as") {
-                        rftitle = "Auto Start Position"
-                    } else {
-                        thisInputEl = thisRF instanceof RadioNodeList ? thisRF[0] : thisRF;
-                        rftitle = thisInputEl.parentElement.parentElement.children[0].innerHTML.replace("&nbsp;", "");
+            for (const [tableName, tableRequiredFields] of Object.entries(requiredFields)) {
+                if (document.getElementById(tableName).style.display == "table") {
+                    for (rf of tableRequiredFields) {
+                        var thisRF = document.forms.scoutingForm[rf];
+                        if (thisRF.value == "[]" || thisRF.value.length == 0) {
+                            if (rf == "as") {
+                                rftitle = "Auto Start Position"
+                            } else {
+                                thisInputEl = thisRF instanceof RadioNodeList ? thisRF[0] : thisRF;
+                                rftitle = thisInputEl.parentElement.parentElement.children[0].innerHTML.replace("&nbsp;", "");
+                            }
+                            errStr += rftitle + "\n";
+                            ret = false;
+                        }
                     }
-                    errStr += rftitle + "\n";
-                    ret = false;
                 }
             }
+
             if (ret == false) {
-                alert("Enter all required values\n" + errStr);
+                alert("Enter all required values:\n" + errStr);
             }
             return ret
         }
@@ -1159,6 +1174,17 @@
                     document.getElementById('copyButton').setAttribute('value', 'Copy Data');
                 }
             }
+        } function initPage(increment) {
+            slides = document.getElementById("main-panel-holder").children
+            if (slide + increment < slides.length && slide + increment >= 0) {
+                slides[slide].style.display = "none";
+                slide += increment;
+                window.scrollTo(0, 0);
+                slides[slide].style.display = "table";
+                document.getElementById('data').innerHTML = "";
+                document.getElementById('copyButton').setAttribute('value', 'Copy Data');
+            }
+
         }
 
         function drawFields(name) {
@@ -1533,14 +1559,17 @@
                     setUpGoogleSheets();
                 }
             }
+            initPage(1);
+            initPage(-1);
         };
     </script>
     <!-- <script src="2024/crescendo_config_v1.js"></script> -->
     <script>
+
         var config_data = `
 {
   "dataFormat": "tsv",
-  "title": "2024 Simulation Competion Scouting System",
+  "title": "2024 Central Valley Regional Scouting System",
   "page_title": "scout",
   "checkboxAs": "YN",
   "prematch": [
@@ -1700,6 +1729,7 @@
     }
   ]
 }`;
+
     </script>
     <!-- <link rel="stylesheet" href="resources/css/scoutingPASS.css"> -->
     <style>

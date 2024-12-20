@@ -1,7 +1,7 @@
 {
-  "name": "js13kGames Progressive Web App",
-  "short_name": "Scout",
-  "description": "Progressive Web App that lists games submitted to the A-Frame category in the js13kGames 2017 competition.",
+  "name": "FRC 6998 2024 scouting app",
+  "short_name": "Scouting",
+  "description": "FRC 6998 2024 scouting app fork from scouting pass",
   "icons": [
     {
       "src": "icons/icon-512.png",

@@ -1,19 +1,5 @@
 const cacheName = "scoutPWA-v1";
-const contentToCache = [
-  "/2024SCOUT",
-  "/2024SCOUT",
-  "/2024SCOUT/insex.html",
-  "/2024SCOUT/favicon.ico",
-  "/2024SCOUT/icons/icon-512.png",
-  "/2024SCOUT/resources/css/scoutingPASS.css",
-  "/2024SCOUT/resources/fonts/alexisv3.ttf",
-  "/2024SCOUT/resources/js/TBAInterface.js",
-  "/2024SCOUT/resources/js/easy.qrcode.min.js",
-  "/2024SCOUT/resources/js/googleSheets.js",
-  "/2024SCOUT/resources/js/scoutingPASS.js",
-  "/2024SCOUT/2024/crescendo_config_v1.js",
-  "/2024SCOUT/scoutPWA.webmanifest"
-]
+const contentToCache = ["/2024SCOUT/"]
 
 self.addEventListener("install", (e) => {
   console.log("[Service Worker] Install");

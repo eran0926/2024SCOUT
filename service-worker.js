@@ -1,5 +1,5 @@
 const cacheName = "scoutPWA-v1";
-const contentToCache = ["/2024SCOUT/index.html"]
+const contentToCache = ["/2024SCOUT"]
 
 self.addEventListener("install", (e) => {
   console.log("[Service Worker] Install");
